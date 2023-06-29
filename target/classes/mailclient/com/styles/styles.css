@@ -1,0 +1,20 @@
+.headline {
+    -fx-font-size: 14px;
+    -fx-font-family: "Pacifico", cursive;;
+    -fx-text-fill: white;
+    -fx-text-stroke: #000000;
+    -fx-text-stroke-width: 2px;
+    -fx-padding: 5px;
+    -fx-background-color: "2a9d8f";
+    -fx-background-radius: 7px;
+    -fx-alignment: center;
+}
+
+.block-headline {
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-font-family: "Pacifico", cursive;;
+    -fx-padding: 5px;
+    -fx-background-color: "2a9d8f";
+    -fx-background-radius: 7px;
+}

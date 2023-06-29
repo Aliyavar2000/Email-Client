@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+
+<VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mailclient.com.SecondaryController">
+    <GridPane alignment="TOP_LEFT">
+        <VBox GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <GridPane.margin>
+                <Insets left="160" top="60"/>
+            </GridPane.margin>
+            <GridPane vgap="10" hgap="10">
+                <Label text="Outgoing Mail-Server">
+                    <styleClass>
+                        headline
+                    </styleClass>
+                </Label>
+                <Label text="SMTP" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <styleClass>
+                        block-headline
+                    </styleClass>
+                </Label>
+                <Label text="Hostname" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="outgoingHostnameField"/>
+                <Label text="Port" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="outgoingPortField"/>
+            </GridPane>
+        </VBox>
+        <VBox GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <GridPane.margin>
+                    <Insets left="100" bottom="40"/>
+            </GridPane.margin>
+            <ImageView GridPane.columnIndex="2" GridPane.rowIndex="2">
+                <image>
+                        <Image url="@logo.png" />
+                </image>
+            </ImageView>
+        </VBox>
+        <VBox GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <GridPane.margin>
+                <Insets left="160" top= "60"/>
+            </GridPane.margin>
+            <GridPane vgap="10" hgap="10">
+                <Label text="Incoming Mail-Server">
+                    <styleClass>
+                        headline
+                    </styleClass>
+                </Label>
+                <Label text="POP3" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <styleClass>
+                        block-headline
+                    </styleClass>
+                </Label>
+                <Label text="Hostname" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="incomingHostnameField"/>
+                <Label text="Port" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="incomingPortField"/>
+            </GridPane>    
+        </VBox>    
+        <HBox alignment="BOTTOM_RIGHT" GridPane.columnIndex="0" GridPane.rowIndex="5" spacing="10">
+            <GridPane.margin>
+                <Insets top="25"/>
+            </GridPane.margin>
+            <Button text="Cancel" fx:id="cancelButton"/>
+            <Button text="Continue" fx:id="continueButton"/>
+        </HBox>
+    </GridPane>
+</VBox>
