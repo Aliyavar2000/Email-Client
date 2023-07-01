@@ -1,5 +1,5 @@
 .headline {
-    -fx-font-size: 14px;
+    -fx-font-size: 15px;
     -fx-font-family: "Pacifico", cursive;;
     -fx-text-fill: white;
     -fx-text-stroke: #000000;
@@ -11,10 +11,80 @@
 }
 
 .block-headline {
-    -fx-font-size: 14px;
+    -fx-font-size: 15px;
     -fx-text-fill: white;
     -fx-font-family: "Pacifico", cursive;;
     -fx-padding: 5px;
     -fx-background-color: "2a9d8f";
     -fx-background-radius: 7px;
 }
+
+.mask-headline {
+    -fx-font-size: 22px;
+    -fx-text-fill: #2a9d8f;
+    -fx-font-family: "Pacifico", cursive;;
+    -fx-padding: 5px;
+    /* -fx-background-color: "white"; */
+    /* -fx-background-radius: 7px; */
+}
+
+.text-field-name {
+    -fx-font-size: 14px;
+    -fx-font-family: "Pacifico", cursive;;
+    -fx-text-fill: #2a9d8f;
+    -fx-text-stroke: #000000;
+    -fx-padding: 5px;
+    -fx-background-color: white;
+    -fx-background-radius: 7px;
+}
+
+.button-continue-cancel{
+    -fx-background-color: #2a9d8f;
+    -fx-text-fill: white;
+}
+
+.button-continue-cancel:hover {
+    -fx-background-color: #3d848d; /* Darker green */
+}
+
+.host-port-input {
+    -fx-border-color: #2a9d8f; 
+    -fx-border-width: 1px;
+    -fx-font-family: "Pacifico", cursive;
+}
+
+.loading-text {
+    -fx-font-size: 18px;
+    -fx-font-family: "Pacifico", cursive;;
+    -fx-text-fill: #2a9d8f;
+    -fx-text-stroke: #000000;
+    /* -fx-padding: 5px; */
+    /* -fx-background-color: white; */
+}
+
+.progress-bar {
+    -fx-background-color: #f2f2f2;
+    /* to be extended */
+}
+
+.compose-button {
+    -fx-text-fill: white;
+    -fx-font-family: "Pacifico", cursive;;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    /* -fx-padding: 6px 12px; */
+    -fx-background-color: #2a9d8f;
+    -fx-cursor: hand;
+}
+
+.compose-button:hover {
+    /* -fx-background-color: #3d848d; */
+}
+
+.compose-pane {
+    /* -fx-border-radius: 14px; */
+    -fx-background-radius: 14px; 
+    -fx-background-color: #2a9d8f;
+    
+}
+

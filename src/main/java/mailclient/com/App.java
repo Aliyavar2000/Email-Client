@@ -20,10 +20,11 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("primary"));
-        Screen screen = Screen.getPrimary();
-        Rectangle2D bounds = screen.getVisualBounds();
-        stage.setWidth(bounds.getWidth());
-        stage.setHeight(bounds.getHeight());
+        // Screen screen = Screen.getPrimary();
+        // Rectangle2D bounds = screen.getVisualBounds();
+        stage.setWidth(1080);
+        stage.setHeight(620);
+        stage.setResizable(false);
         scene.getStylesheets()
                 .add(getClass().getResource("/mailclient/com/styles/styles.css").toExternalForm());
         stage.setScene(scene);
@@ -36,7 +37,7 @@ public class App extends Application {
 
     static private Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(
-                "/mailclient/com/" + fxml + ".fxml"));
+                "/mailclient/com/scenes/" + fxml + ".fxml"));
         return fxmlLoader.load();
     }
 
