@@ -5,4 +5,7 @@ module mailclient.com {
     opens mailclient.com to javafx.fxml;
 
     exports mailclient.com;
+
+    opens mailclient.com.models to javafx.base;
+
 }

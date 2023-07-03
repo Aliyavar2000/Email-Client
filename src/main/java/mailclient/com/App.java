@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -19,7 +20,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"));
+        scene = new Scene(loadFXML("Login"));
         // Screen screen = Screen.getPrimary();
         // Rectangle2D bounds = screen.getVisualBounds();
         stage.setWidth(1080);
@@ -27,6 +28,7 @@ public class App extends Application {
         stage.setResizable(false);
         scene.getStylesheets()
                 .add(getClass().getResource("/mailclient/com/styles/styles.css").toExternalForm());
+
         stage.setScene(scene);
         stage.show();
     }

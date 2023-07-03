@@ -46,10 +46,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<BorderPane prefHeight="621.0" prefWidth="1083.0" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mailclient.com.ServerSettingController" >
+<BorderPane prefHeight="620.0" prefWidth="1080.0" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mailclient.com.ServerSettingController">
    <top>
-      <Pane prefHeight="48.0" prefWidth="1121.0" BorderPane.alignment="CENTER">
+      <Pane prefHeight="54.0" prefWidth="1003.0" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="479.0" layoutY="8.0" prefHeight="42.0" prefWidth="157.0" styleClass="mask-headline" stylesheets="@../styles/styles.css" text="Server Setting" />
          </children>
@@ -102,8 +101,8 @@
          <children>
             <ButtonBar layoutX="753.0" layoutY="1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="70.0" prefWidth="140.0" stylesheets="@../styles/styles.css">
               <buttons>
-                  <Button layoutX="135.0" layoutY="18.0" mnemonicParsing="false" styleClass="button-continue-cancel" stylesheets="@../styles/styles.css" text="Cancel" fx:id="cancelSetting" onAction="#switchToLogin" />
-                <Button mnemonicParsing="false" styleClass="button-continue-cancel" stylesheets="@../styles/styles.css" text="Continue" fx:id="continueToSetupProgress" onAction="#switchToSetupInProgress" >
+                  <Button fx:id="cancelSetting" layoutX="135.0" layoutY="18.0" mnemonicParsing="false" onAction="#switchToLogin" styleClass="button-continue-cancel" stylesheets="@../styles/styles.css" text="Cancel" />
+                <Button fx:id="continueToSetupProgress" mnemonicParsing="false" onAction="#switchToSetupInProgress" styleClass="button-continue-cancel" stylesheets="@../styles/styles.css" text="Continue">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

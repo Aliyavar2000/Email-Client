@@ -7,12 +7,13 @@ public class ServerSettingController {
 
     @FXML
     private void switchToSetupInProgress() throws IOException {
-        App.setRoot("SetupInProgress");
+        App.setRoot("Homepage");
+        // App.setRoot("SetupInProgress");
     }
 
     @FXML
     private void switchToLogin() throws IOException {
-        App.setRoot("SetupInProgress");
+        App.setRoot("primary");
     }
 
     @FXML
