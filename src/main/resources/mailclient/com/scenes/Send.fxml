@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -15,16 +18,63 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mailclient.com.ServerSettingController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mailclient.com.controllers.SendController">
    <children>
       <BorderPane prefHeight="620.0" prefWidth="1080.0">
          <left>
-            <VBox prefHeight="606.0" prefWidth="226.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="620.0" prefWidth="226.0" styleClass="menu-panel" stylesheets="@../styles/styles.css" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane prefHeight="627.0" prefWidth="230.0" styleClass="host-port-input" stylesheets="@../styles/styles.css">
+                  <AnchorPane prefHeight="620.0" prefWidth="200.0">
                      <children>
-                        <VBox layoutX="225.5" layoutY="43.5" styleClass="host-port-input" stylesheets="@../styles/styles.css" />
+                        <Button fx:id="homepageButton" layoutX="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backToHome" prefHeight="163.0" prefWidth="215.0" styleClass="menu-button-home" stylesheets="@../styles/styles.css">
+                           <graphic>
+                              <ImageView fitHeight="185.0" fitWidth="208.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/logo_white.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <AnchorPane layoutY="185.0" prefHeight="427.0" prefWidth="226.0">
+                           <children>
+                              <Button fx:id="settingsButton" layoutX="14.0" layoutY="229.0" mnemonicParsing="false" onAction="#switchToSettings" prefHeight="51.0" prefWidth="200.0" stylesheets="@../styles/styles.css" text="Settings">
+                                 <font>
+                                    <Font name="Century" size="12.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="compose-button" />
+                                    <String fx:value="text" />
+                                 </styleClass>
+                              </Button>
+                              <Button fx:id="syncButton" layoutX="14.0" layoutY="120.0" mnemonicParsing="false" onAction="#syncMessages" prefHeight="51.0" prefWidth="200.0" stylesheets="@../styles/styles.css" text="Receive">
+                                 <font>
+                                    <Font name="Century" size="12.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="compose-button" />
+                                    <String fx:value="text" />
+                                 </styleClass>
+                              </Button>
+                              <Button fx:id="quitButton" layoutX="14.0" layoutY="330.0" mnemonicParsing="false" onAction="#terminate" prefHeight="51.0" prefWidth="200.0" stylesheets="@../styles/styles.css" text="Quit">
+                                 <font>
+                                    <Font name="Century" size="12.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="compose-button" />
+                                    <String fx:value="text" />
+                                 </styleClass>
+                              </Button>
+                              <Button fx:id="composeButton" layoutX="13.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToCompose" prefHeight="51.0" prefWidth="200.0" stylesheets="@../styles/styles.css" text="Compose">
+                                 <font>
+                                    <Font name="Century" size="12.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="compose-button" />
+                                    <String fx:value="text" />
+                                 </styleClass>
+                              </Button>
+                           </children>
+                        </AnchorPane>
                      </children>
                   </AnchorPane>
                </children>
@@ -80,10 +130,18 @@
                                     <Insets left="24.0" />
                                  </padding>
                               </Label>
-                              <TextField fx:id="FromBox" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" />
-                              <TextField fx:id="ToBox" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField fx:id="CcBox" prefHeight="34.0" prefWidth="762.0" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField fx:id="SubjectBox" prefHeight="35.0" prefWidth="762.0" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="FromBox" disable="true" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font name="Arial Black" size="12.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="ToBox" promptText=" " styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="Arial Black" size="12.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="CcBox" prefHeight="34.0" prefWidth="762.0" promptText=" " styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="SubjectBox" prefHeight="35.0" prefWidth="762.0" promptText=" " styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                               <Line endX="1204.29296875" endY="0.7928932309150696" startX="493.0" stroke="#2a9d8f" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                            </children>
                            <opaqueInsets>
@@ -99,15 +157,15 @@
                <center>
                   <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                      <children>
-                        <TextArea fx:id="MessageBox" layoutX="20.0" prefHeight="379.0" prefWidth="800.0" styleClass="host-port-input" stylesheets="@../styles/styles.css">
+                        <TextArea fx:id="MessageBox" layoutX="20.0" prefHeight="379.0" prefWidth="800.0" promptText=" " styleClass="host-port-input" stylesheets="@../styles/styles.css">
                            <VBox.margin>
                               <Insets left="108.0" top="10.0" />
                            </VBox.margin>
                         </TextArea>
                         <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="44.0" prefWidth="830.0" stylesheets="@../styles/styles.css">
                            <buttons>
-                              <Button fx:id="CancelSending" layoutX="135.0" layoutY="18.0" mnemonicParsing="false" onAction="#switchToLogin" styleClass="button-continue-cancel" stylesheets="@../styles/styles.css" text="Cancel" />
-                              <Button fx:id="ContinueToSendSuccessfully" mnemonicParsing="false" onAction="#switchToSetupInProgress" styleClass="button-continue-cancel" stylesheets="@../styles/styles.css" text="Send">
+                              <Button fx:id="CancelSending" layoutX="135.0" layoutY="18.0" mnemonicParsing="false" onAction="#backToHome" styleClass="button-continue-cancel" stylesheets="@../styles/styles.css" text="Cancel" />
+                              <Button fx:id="ContinueToSendSuccessfully" mnemonicParsing="false" styleClass="button-continue-cancel" onAction="#send" stylesheets="@../styles/styles.css" text="Send">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>

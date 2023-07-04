@@ -136,6 +136,10 @@
 .menu-buttons:hover {
     -fx-background-color: #83c5be;
 }
+.menu-button-home {
+    -fx-cursor: hand;
+    -fx-background-color: #2a9d8f;
+}
 
 .column-headlines {
     -fx-font-size: 18px;

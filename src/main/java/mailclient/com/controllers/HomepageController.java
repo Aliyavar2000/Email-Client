@@ -1,5 +1,6 @@
-package mailclient.com;
+package mailclient.com.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -11,6 +12,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -24,11 +26,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
+import mailclient.com.App;
 import mailclient.com.models.EmailModel;
 
 public class HomepageController implements Initializable {
     @FXML
     private TableView<EmailModel> tableView;
+
+    @FXML
+    private Button homepageButton;
 
     @FXML
     private Button composeButton;
@@ -81,6 +87,43 @@ public class HomepageController implements Initializable {
 
     @FXML
     private TextArea messageText;
+
+    @FXML
+    void switchToCompose(ActionEvent event) {
+        try {
+            App.setRoot("Send");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void switchToSettings(ActionEvent event) {
+        try {
+            App.setRoot("Settings");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void syncMessages(ActionEvent event) {
+
+    }
+
+    @FXML
+    void terminate(ActionEvent event) {
+
+    }
+
+    @FXML
+    void switchToHome(ActionEvent event) {
+        try {
+            App.setRoot("Homepage");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

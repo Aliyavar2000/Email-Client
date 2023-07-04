@@ -1,7 +1,8 @@
-package mailclient.com;
+package mailclient.com.controllers;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
+import mailclient.com.App;
 
 public class ServerSettingController {
 

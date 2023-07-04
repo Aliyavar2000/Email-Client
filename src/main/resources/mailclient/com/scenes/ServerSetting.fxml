@@ -46,7 +46,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="620.0" prefWidth="1080.0" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mailclient.com.ServerSettingController">
+<BorderPane prefHeight="620.0" prefWidth="1080.0" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mailclient.com.controllers.ServerSettingController">
    <top>
       <Pane prefHeight="54.0" prefWidth="1003.0" BorderPane.alignment="CENTER">
          <children>
@@ -103,6 +103,7 @@
               <buttons>
                   <Button fx:id="cancelSetting" layoutX="135.0" layoutY="18.0" mnemonicParsing="false" onAction="#switchToLogin" styleClass="button-continue-cancel" stylesheets="@../styles/styles.css" text="Cancel" />
                 <Button fx:id="continueToSetupProgress" mnemonicParsing="false" onAction="#switchToSetupInProgress" styleClass="button-continue-cancel" stylesheets="@../styles/styles.css" text="Continue">
+                     <!-- change to  #switchToSetupInProgress -->
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

@@ -45,8 +45,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.PasswordField?>
 
-<BorderPane prefHeight="620.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mailclient.com.LoginController">
+<BorderPane prefHeight="620.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mailclient.com.controllers.LoginController">
    <top>
       <Pane prefHeight="54.0" prefWidth="1003.0" BorderPane.alignment="CENTER">
          <children>
@@ -71,14 +72,14 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField depthTest="ENABLE" prefHeight="41.0" prefWidth="263.0" promptText="Full Name" styleClass="host-port-input" stylesheets="@../styles/styles.css">
+                  <TextField fx:id="FullnameBox" depthTest="ENABLE" prefHeight="41.0" prefWidth="263.0" promptText="Full Name" styleClass="host-port-input" stylesheets="@../styles/styles.css">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
                   </TextField>
-                  <TextField promptText="Email" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.rowIndex="2" />
-                  <TextField promptText="Username" style="-fx-background-color: #FFFFFF;" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.rowIndex="4" />
-                  <TextField promptText="Password" style="-fx-background-color: #FFFFFF;" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.rowIndex="6" />
+                  <TextField fx:id="EmailBox" promptText="Email" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.rowIndex="2" />
+                  <TextField fx:id="UsernameBox" promptText="Username" style="-fx-background-color: #FFFFFF;" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.rowIndex="4" />
+                  <PasswordField fx:id="PasswordBox" promptText="Password" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.rowIndex="6" />
                </children>
             </GridPane>
          </children>
@@ -102,7 +103,7 @@
                <buttons>
                   <Button fx:id="cancelLogin" layoutX="135.0" layoutY="18.0" mnemonicParsing="false" styleClass="button-continue-cancel" stylesheets="@../styles/styles.css" text="Cancel" />
                   <!-- onAction="#terminateApp" -->
-                  <Button fx:id="continueToSetting" mnemonicParsing="false" onAction="#switchToServerSetting" styleClass="button-continue-cancel" stylesheets="@../styles/styles.css" text="Continue">
+                  <Button fx:id="continueToSetting" mnemonicParsing="false" onAction="#continueBtn" styleClass="button-continue-cancel" stylesheets="@../styles/styles.css" text="Continue">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
