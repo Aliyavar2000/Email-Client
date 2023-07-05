@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import mailclient.com.App;
+import mailclient.com.EmailAPI.EstablishConnection;
+import mailclient.com.connectionData.MessageData;
 import mailclient.com.credentials.UserCredentials;
 
 public class SendController implements Initializable {
@@ -97,7 +99,6 @@ public class SendController implements Initializable {
         try {
 
             String to = ToBox.getText();
-
             // Error handling
             if (to.isEmpty() || to.contains("!") || to.contains(",") || to.contains(";") || to.contains(":")
                     || to.contains(" ") || !to.contains("@") || !to.contains(".")) {
@@ -130,6 +131,8 @@ public class SendController implements Initializable {
                 MessageBox.setPromptText("Enter a message!");
                 return;
             }
+            EstablishConnection establishConnection = new EstablishConnection();
+            MessageData messageData = new MessageData(to, cc, subject, message);
 
             System.out.println("Sent!");
             // switchToSetupInProgress();
