@@ -4,8 +4,14 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import mailclient.com.App;
 import mailclient.com.credentials.UserCredentials;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
 
@@ -18,14 +24,30 @@ public class LoginController {
     private TextField UsernameBox;
     @FXML
     private TextField PasswordBox;
+    @FXML
+    private BorderPane LoginBorder;
+    @FXML
+    private Button cancelLogin;
+
+    Stage stage;
 
     @FXML
     private void switchToServerSetting() throws IOException {
         App.setRoot("ServerSetting");
     }
 
-    private void terminateApp() throws IOException {
-        // App.setRoot("SetupInProgress");
+    public void terminateApp(ActionEvent event) throws IOException {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
+        alert.setHeaderText("Hambal! Are you sure you want to logout?");
+        alert.setContentText("Press OK to continue");
+
+        if (alert.showAndWait().get().equals(ButtonType.OK)) {
+
+            stage = (Stage) LoginBorder.getScene().getWindow();
+            stage.close();
+        }
+
     }
 
     public void continueBtn(ActionEvent event) throws IOException {

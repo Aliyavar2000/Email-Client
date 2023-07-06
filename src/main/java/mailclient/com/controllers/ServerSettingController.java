@@ -29,10 +29,10 @@ public class ServerSettingController {
     @FXML
     private TextField outgoingPortField;
 
-    @FXML
-    void switchToLogin(ActionEvent event) {
+    // @FXML
+    // void switchToLogin(ActionEvent event) {
 
-    }
+    // }
 
     // @FXML
     // void switchToSetupInProgress(ActionEvent event) {
@@ -41,13 +41,19 @@ public class ServerSettingController {
 
     @FXML
     private void switchToSetupInProgress() throws IOException {
-        String outgoingPort = outgoingPortField.getText().trim();
-        String outgoingHostname = outgoingHostnameField.getText().trim();
-        String incomingPort = incomingPortField.getText().trim();
-        String incomingHostname = incomingHostnameField.getText().trim();
-        ConnectionInfo.initialize(incomingHostname, Integer.parseInt(incomingPort), outgoingHostname,
-                Integer.parseInt(outgoingPort));
-        App.setRoot("SetupInProgress");
+        String outgoingPort = outgoingPortField.getText();
+        int outgoingPortInt = Integer.parseInt(outgoingPort);
+        String outgoingHostname = outgoingHostnameField.getText();
+        String incomingPort = incomingPortField.getText();
+        int incomingPortInt = Integer.parseInt(incomingPort);
+        String incomingHostname = incomingHostnameField.getText();
+        // System.out.println("outgoingHostname: " + outgoingHostname);
+        // System.out.println("outgoingPort: " + outgoingPortInt);
+        // System.out.println("incomingHostname: " + incomingHostname);
+        // System.out.println("incomingPort: " + incomingPortInt);
+        ConnectionInfo.initialize(incomingHostname, incomingPortInt,
+                outgoingHostname, outgoingPortInt);
+        App.setRoot("Homepage");
         // App.setRoot("SetupInProgress");
     }
 

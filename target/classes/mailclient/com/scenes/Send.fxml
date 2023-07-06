@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mailclient.com.controllers.SendController">
+<AnchorPane fx:id="AnchorSend" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mailclient.com.controllers.SendController">
    <children>
       <BorderPane prefHeight="620.0" prefWidth="1080.0">
          <left>
@@ -55,7 +55,7 @@
                                     <String fx:value="text" />
                                  </styleClass>
                               </Button>
-                              <Button fx:id="quitButton" layoutX="14.0" layoutY="330.0" mnemonicParsing="false" onAction="#terminate" prefHeight="51.0" prefWidth="200.0" stylesheets="@../styles/styles.css" text="Quit">
+                              <Button fx:id="terminateBtn" layoutX="14.0" layoutY="330.0" mnemonicParsing="false" onAction="#terminateApp" prefHeight="51.0" prefWidth="200.0" stylesheets="@../styles/styles.css" text="Quit">
                                  <font>
                                     <Font name="Century" size="12.0" />
                                  </font>
@@ -165,7 +165,7 @@
                         <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="44.0" prefWidth="830.0" stylesheets="@../styles/styles.css">
                            <buttons>
                               <Button fx:id="CancelSending" layoutX="135.0" layoutY="18.0" mnemonicParsing="false" onAction="#backToHome" styleClass="button-continue-cancel" stylesheets="@../styles/styles.css" text="Cancel" />
-                              <Button fx:id="ContinueToSendSuccessfully" mnemonicParsing="false" styleClass="button-continue-cancel" onAction="#send" stylesheets="@../styles/styles.css" text="Send">
+                              <Button fx:id="ContinueToSendSuccessfully" mnemonicParsing="false" onAction="#send" styleClass="button-continue-cancel" stylesheets="@../styles/styles.css" text="Send">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>

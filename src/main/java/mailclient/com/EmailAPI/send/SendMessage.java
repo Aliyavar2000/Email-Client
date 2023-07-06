@@ -1,79 +1,81 @@
-// package mailclient.com.EmailAPI.send;
+package mailclient.com.EmailAPI.send;
 
-// import javax.mail.*;
-// import javax.mail.internet.MimeMessage;
-// import javax.mail.Authenticator;
-// import javax.mail.PasswordAuthentication;
-// import java.util.Base64;
-// import java.util.Properties;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
-// import javax.mail.MessagingException;
-// import javax.mail.Session;
-// import javax.mail.Transport;
+import java.util.Base64;
+import java.util.Properties;
 
-// import mailclient.com.connectionData.MessageData;
+import mailclient.com.connectionData.MessageData;
 
-// public class SendMessage {
-// private String smtpHost;
-// private int smtpPort;
-// private String senderEmail;
-// private String senderPassword;
-// private String receiverEmail;
+public class SendMessage {
+    private String smtpHost;
+    private int smtpPort;
+    private String senderEmail;
+    private String senderPassword;
+    private String receiverEmail;
+    private String ccEmail;
 
-// public SendMessage(String smtpHost, int smtpPort,
-// String senderEmail, String senderPassword, String receiverEmail) {
-// this.smtpHost = smtpHost;
-// this.smtpPort = smtpPort;
-// this.senderEmail = senderEmail;
-// this.senderPassword = senderPassword;
-// this.receiverEmail = receiverEmail;
-// }
+    public SendMessage(String smtpHost, int smtpPort,
+            String senderEmail, String senderPassword, String receiverEmail, String ccEmail) {
+        this.smtpHost = smtpHost;
+        this.smtpPort = smtpPort;
+        this.senderEmail = senderEmail;
+        this.senderPassword = senderPassword;
+        this.receiverEmail = receiverEmail;
+        this.ccEmail = ccEmail;
+    }
 
-// public void sendEmail(String subject, String content) {
-// Properties props = new Properties();
-// props.put("mail.smtp.auth", "true");
-// props.put("mail.smtp.starttls.enable", "true");
-// props.put("mail.smtp.host", smtpHost);
-// props.put("mail.smtp.port", smtpPort);
+    public void sendEmail(String subject, String content) {
+        Properties props = new Properties();
+        if (smtpPort == 465) {
+            props = new Properties();
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.ssl.enable", "true");
+            props.put("mail.smtp.host", smtpHost);
+            props.put("mail.smtp.port", smtpPort);
+            props.put("mail.debug", "true");
+            props.put("mail.debug.auth", "true");
+        } else if (smtpPort == 587) {
+            props = new Properties();
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.host", smtpHost);
+            props.put("mail.smtp.port", smtpPort);
 
-// Authenticator authenticator = new Authenticator() {
-// protected PasswordAuthentication getPasswordAuthentication() {
-// String encodedUsername = base64Encode(senderEmail);
-// String encodedPassword = base64Encode(senderPassword);
-// return new PasswordAuthentication(encodedUsername, encodedPassword);
-// }
-// };
-// try {
-// Session session = Session.getInstance(props, new Authenticator() {
-// @Override
-// protected PasswordAuthentication getPasswordAuthentication() {
-// String encodedUsername = base64Encode(senderEmail);
-// String encodedPassword = base64Encode(senderPassword);
-// return new PasswordAuthentication(encodedUsername, encodedPassword);
-// }
-// });
+        } else {
+            throw new IllegalArgumentException("Invalid SMTP port: " + smtpPort);
+        }
 
-// MimeMessage message = EmailMessageBuilder.createMessage(session, senderEmail,
-// receiverEmail, subject,
-// content);
+        try {
+            Session session = Session.getInstance(props, new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    String decodedUsername = decodeBase64(senderEmail);
+                    String decodedPassword = decodeBase64(senderPassword);
+                    return new PasswordAuthentication(decodedUsername, decodedPassword);
+                }
+            });
 
-// EmailTransportBuilder emailTransportBuilder = new
-// EmailTransportBuilder(session, smtpHost, smtpPort);
-// Transport transport = emailTransportBuilder.createTransport(session,
-// smtpHost, smtpPort, senderEmail,
-// senderPassword);
-// EmailSender emailSender = new EmailSender(transport, message);
-// emailSender.sendMessage(transport, message);
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(senderEmail));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(receiverEmail));
+            message.setSubject(subject);
+            message.setText(content);
 
-// transport.close();
+            message.setRecipient(Message.RecipientType.CC, new InternetAddress(ccEmail));
 
-// System.out.println("Email sent successfully!");
-// } catch (MessagingException e) {
-// e.printStackTrace();
-// }
-// }
+            Transport.send(message, senderEmail, senderPassword);
 
-// private static String base64Encode(String input) {
-// return Base64.getEncoder().encodeToString(input.getBytes());
-// }
-// }
+            System.out.println("Email sent successfully!");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static String decodeBase64(String encodedString) {
+        byte[] decodedBytes = Base64.getDecoder().decode(encodedString);
+        return new String(decodedBytes);
+    }
+}
