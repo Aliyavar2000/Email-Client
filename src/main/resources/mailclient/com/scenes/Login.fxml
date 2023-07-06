@@ -36,6 +36,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -45,9 +46,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.control.PasswordField?>
 
-<BorderPane prefHeight="620.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mailclient.com.controllers.LoginController">
+<BorderPane fx:id="LoginBorder" prefHeight="620.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mailclient.com.controllers.LoginController">
    <top>
       <Pane prefHeight="54.0" prefWidth="1003.0" BorderPane.alignment="CENTER">
          <children>
@@ -101,7 +101,7 @@
          <children>
             <ButtonBar layoutX="753.0" layoutY="1.0" prefHeight="70.0" prefWidth="140.0">
                <buttons>
-                  <Button fx:id="cancelLogin" layoutX="135.0" layoutY="18.0" mnemonicParsing="false" styleClass="button-continue-cancel" stylesheets="@../styles/styles.css" text="Cancel" />
+                  <Button fx:id="cancelLogin" layoutX="135.0" layoutY="18.0" mnemonicParsing="false" onAction="#terminateApp" styleClass="button-continue-cancel" stylesheets="@../styles/styles.css" text="Cancel" />
                   <!-- onAction="#terminateApp" -->
                   <Button fx:id="continueToSetting" mnemonicParsing="false" onAction="#continueBtn" styleClass="button-continue-cancel" stylesheets="@../styles/styles.css" text="Continue">
                      <opaqueInsets>

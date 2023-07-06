@@ -13,7 +13,19 @@ public class MessageData {
         this.emailCc = emailCc;
     }
 
-    public String getEmail_reciever() {
+    public String getEmailReciever() {
         return emaiReceiver;
+    }
+
+    public String getEmailSubject() {
+        return emailSubject;
+    }
+
+    public String getEmailText() {
+        return emailText;
+    }
+
+    public String getEmailCc() {
+        return emailCc;
     }
 }

@@ -7,13 +7,20 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import mailclient.com.App;
-import mailclient.com.EmailAPI.EstablishConnection;
+//import mailclient.com.EmailAPI.EstablishConnection;
+import mailclient.com.EmailAPI.send.SendMessage;
 import mailclient.com.connectionData.MessageData;
 import mailclient.com.credentials.UserCredentials;
+import mailclient.com.connectionData.ConnectionInfo;
 
 public class SendController implements Initializable {
 
@@ -45,13 +52,18 @@ public class SendController implements Initializable {
     private Button composeButton;
 
     @FXML
-    private Button quitButton;
+    private Button terminateBtn;
 
     @FXML
     private Button settingsButton;
 
     @FXML
     private Button syncButton;
+
+    @FXML
+    private AnchorPane AnchorSend;
+
+    Stage stage;
 
     @FXML
     void switchToCompose(ActionEvent event) {
@@ -63,9 +75,9 @@ public class SendController implements Initializable {
     }
 
     @FXML
-    void switchToSettings(ActionEvent event) {
+    public void switchToSettings(ActionEvent event) {
         try {
-            App.setRoot("Settings");
+            App.setRoot("SettingConfig");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -77,7 +89,17 @@ public class SendController implements Initializable {
     }
 
     @FXML
-    void terminate(ActionEvent event) {
+    public void terminateApp(ActionEvent event) {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
+        alert.setHeaderText("Hambal! Are you sure you want to logout?");
+        alert.setContentText("Press OK to continue");
+
+        if (alert.showAndWait().get().equals(ButtonType.OK)) {
+
+            stage = (Stage) AnchorSend.getScene().getWindow();
+            stage.close();
+        }
 
     }
 
@@ -131,10 +153,22 @@ public class SendController implements Initializable {
                 MessageBox.setPromptText("Enter a message!");
                 return;
             }
-            EstablishConnection establishConnection = new EstablishConnection();
+            // EstablishConnection establishConnection = new EstablishConnection();
+
+            // send
+            ConnectionInfo connectionInfo = new ConnectionInfo();
             MessageData messageData = new MessageData(to, cc, subject, message);
+            String emailSubject = messageData.getEmailSubject();
+            String emailText = messageData.getEmailText();
+            SendMessage emailSender = new SendMessage(ConnectionInfo.getHostSmtp(), ConnectionInfo.getPortSmtp(),
+                    UserCredentials.getUserMail(), UserCredentials.getPassword(), messageData.getEmailReciever(),
+                    messageData.getEmailCc());
+            emailSender.sendEmail(emailSubject, emailText);
+
+            //
 
             System.out.println("Sent!");
+            switchToSettings(event);
             // switchToSetupInProgress();
 
         } catch (Exception e) {

@@ -162,3 +162,16 @@
     -fx-font-size: 15px;
     /* -fx-font-weight: bold; */
 }
+
+.setting-button {
+    -fx-background-color: #2a9d8f;
+    -fx-text-fill: white;
+    -fx-font-family: "Pacifico", cursive;;
+    -fx-font-size: 15px;
+    -fx-cursor: hand;
+    -fx-background-radius: 14px; 
+}
+
+.setting-button:hover {
+    -fx-background-color: #3d848d; /* Darker green */
+}

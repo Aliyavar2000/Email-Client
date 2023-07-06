@@ -29,29 +29,36 @@ public class ServerSettingController {
     @FXML
     private TextField outgoingPortField;
 
-    @FXML
-    void switchToLogin(ActionEvent event) {
+    // @FXML
+    // void switchToLogin(ActionEvent event) {
 
-    }
+    // }
 
-    @FXML
-    void switchToSetupInProgress(ActionEvent event) {
+    // @FXML
+    // void switchToSetupInProgress(ActionEvent event) {
 
-    }
+    // }
 
     @FXML
     private void switchToSetupInProgress() throws IOException {
         String outgoingPort = outgoingPortField.getText();
+        int outgoingPortInt = Integer.parseInt(outgoingPort);
         String outgoingHostname = outgoingHostnameField.getText();
         String incomingPort = incomingPortField.getText();
+        int incomingPortInt = Integer.parseInt(incomingPort);
         String incomingHostname = incomingHostnameField.getText();
-        ConnectionInfo.initialize(incomingHostname, incomingPort, outgoingHostname, outgoingPort);
+        // System.out.println("outgoingHostname: " + outgoingHostname);
+        // System.out.println("outgoingPort: " + outgoingPortInt);
+        // System.out.println("incomingHostname: " + incomingHostname);
+        // System.out.println("incomingPort: " + incomingPortInt);
+        ConnectionInfo.initialize(incomingHostname, incomingPortInt,
+                outgoingHostname, outgoingPortInt);
         App.setRoot("Homepage");
         // App.setRoot("SetupInProgress");
     }
 
     @FXML
     private void switchToLogin() throws IOException {
-        App.setRoot("primary");
+        App.setRoot("Login");
     }
 }
