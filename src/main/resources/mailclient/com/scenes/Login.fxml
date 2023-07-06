@@ -79,7 +79,7 @@
                   </TextField>
                   <TextField fx:id="EmailBox" promptText="Email" styleClass="host-port-input" stylesheets="@../styles/styles.css" text="grigor.muradyan@uni-jena.de" GridPane.rowIndex="2" />
                   <TextField fx:id="UsernameBox" promptText="Username" style="-fx-background-color: #FFFFFF;" styleClass="host-port-input" stylesheets="@../styles/styles.css" text="he76coq" GridPane.rowIndex="4" />
-                  <PasswordField fx:id="PasswordBox" promptText="Password" styleClass="host-port-input" stylesheets="@../styles/styles.css" text="Nortarvasexan777" GridPane.rowIndex="6" />
+                  <PasswordField fx:id="PasswordBox" promptText="Password" styleClass="host-port-input" stylesheets="@../styles/styles.css" text="" GridPane.rowIndex="6" />
                </children>
             </GridPane>
          </children>
