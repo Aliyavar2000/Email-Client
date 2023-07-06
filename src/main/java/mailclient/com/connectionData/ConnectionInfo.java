@@ -5,12 +5,12 @@ import mailclient.com.credentials.UserCredentials;
 public class ConnectionInfo {
     private static String hostPop3;
     private static String hostSmtp;
-    private static String portPop3;
-    private static String portSmtp;
+    private static int portPop3;
+    private static int portSmtp;
     // private static String userMail;
     // private static String userPassword;
 
-    public static void initialize(String hostPop3, String portPop3, String hostSmtp, String portSmtp) {
+    public static void initialize(String hostPop3, int portPop3, String hostSmtp, int portSmtp) {
         ConnectionInfo.hostPop3 = hostPop3;
         ConnectionInfo.hostSmtp = hostSmtp;
         ConnectionInfo.portPop3 = portPop3;
@@ -27,11 +27,11 @@ public class ConnectionInfo {
         return hostSmtp;
     }
 
-    public static String getPortPop3() {
+    public static int getPortPop3() {
         return portPop3;
     }
 
-    public static String getPortSmtp() {
+    public static int getPortSmtp() {
         return portSmtp;
     }
 }

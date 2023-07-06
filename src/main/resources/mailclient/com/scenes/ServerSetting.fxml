@@ -59,10 +59,10 @@
          <children>
             <GridPane hgap="10" layoutX="140.0" layoutY="256.0" prefHeight="114.0" prefWidth="274.0" stylesheets="@../styles/styles.css" vgap="10">
                <children>
-                  <Label prefHeight="31.0" prefWidth="160.0" styleClass="&#10;                        headline&#10;                    " text="Incoming Mail-Server" />
+                  <Label prefHeight="29.0" prefWidth="168.0" styleClass="&#10;                        headline&#10;                    " text="Incoming Mail-Server" />
                   <Label styleClass="&#10;                        block-headline&#10;                    " text="POP3" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                  <TextField fx:id="incomingHostnameField" prefHeight="25.0" prefWidth="201.0" promptText="Host" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.rowIndex="2" />
-                  <TextField fx:id="incomingPortField" prefHeight="25.0" prefWidth="62.0" promptText="Port" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="incomingHostnameField" prefHeight="25.0" prefWidth="201.0" promptText="Host" styleClass="host-port-input" stylesheets="@../styles/styles.css" text=" pop3.uni-jena.de" GridPane.rowIndex="2" />
+                  <TextField fx:id="incomingPortField" prefHeight="25.0" prefWidth="62.0" promptText="Port" styleClass="host-port-input" stylesheets="@../styles/styles.css" text="110" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
                <columnConstraints>
                   <ColumnConstraints />
@@ -77,10 +77,10 @@
             </GridPane>
             <GridPane hgap="10" layoutX="140.0" layoutY="97.0" vgap="10">
                <children>
-                  <Label prefHeight="31.0" prefWidth="160.0" styleClass="&#10;                        headline&#10;                    " stylesheets="@../styles/styles.css" text="Outgoing Mail-Server" />
+                  <Label prefHeight="31.0" prefWidth="171.0" styleClass="&#10;                        headline&#10;                    " stylesheets="@../styles/styles.css" text="Outgoing Mail-Server" />
                   <Label styleClass="&#10;                        block-headline&#10;                    " stylesheets="@../styles/styles.css" text="SMTP" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                  <TextField fx:id="outgoingHostnameField" prefHeight="25.0" prefWidth="201.0" promptText="Host" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.rowIndex="2" />
-                  <TextField fx:id="outgoingPortField" prefHeight="25.0" prefWidth="62.0" promptText="Port" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="outgoingHostnameField" prefHeight="25.0" prefWidth="201.0" promptText="Host" styleClass="host-port-input" stylesheets="@../styles/styles.css" text=" smpt.uni-jena.de" GridPane.rowIndex="2" />
+                  <TextField fx:id="outgoingPortField" prefHeight="25.0" prefWidth="62.0" promptText="Port" styleClass="host-port-input" stylesheets="@../styles/styles.css" text="587" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
                <columnConstraints>
                   <ColumnConstraints />

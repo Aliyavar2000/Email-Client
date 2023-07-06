@@ -34,24 +34,25 @@ public class ServerSettingController {
 
     }
 
-    @FXML
-    void switchToSetupInProgress(ActionEvent event) {
+    // @FXML
+    // void switchToSetupInProgress(ActionEvent event) {
 
-    }
+    // }
 
     @FXML
     private void switchToSetupInProgress() throws IOException {
-        String outgoingPort = outgoingPortField.getText();
-        String outgoingHostname = outgoingHostnameField.getText();
-        String incomingPort = incomingPortField.getText();
-        String incomingHostname = incomingHostnameField.getText();
-        ConnectionInfo.initialize(incomingHostname, incomingPort, outgoingHostname, outgoingPort);
-        App.setRoot("Homepage");
+        String outgoingPort = outgoingPortField.getText().trim();
+        String outgoingHostname = outgoingHostnameField.getText().trim();
+        String incomingPort = incomingPortField.getText().trim();
+        String incomingHostname = incomingHostnameField.getText().trim();
+        ConnectionInfo.initialize(incomingHostname, Integer.parseInt(incomingPort), outgoingHostname,
+                Integer.parseInt(outgoingPort));
+        App.setRoot("SetupInProgress");
         // App.setRoot("SetupInProgress");
     }
 
     @FXML
     private void switchToLogin() throws IOException {
-        App.setRoot("primary");
+        App.setRoot("Login");
     }
 }

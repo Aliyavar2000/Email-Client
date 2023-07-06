@@ -2,6 +2,7 @@ module mailclient.com {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.mail;
+    requires org.json;
 
     opens mailclient.com.controllers to javafx.fxml;
 

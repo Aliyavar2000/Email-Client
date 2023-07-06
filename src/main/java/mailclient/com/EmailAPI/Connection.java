@@ -7,22 +7,29 @@ import javax.mail.Session;
 import javax.mail.Store;
 
 import mailclient.com.connectionData.ConnectionInfo;
+import mailclient.com.credentials.UserCredentials;
 
-public class EstablishConnection {
+public class Connection {
     private Session emailSession;
-    private Folder inbox;
     private Store store;
+    private String host;
+    private int port;
+    private String user;
+    private String password;
+    private Folder inbox;
 
-    // public EstablishConnection(String host, int port, String user, String
-    // password) {
-
-    // }
+    public Connection() {
+        this.host = ConnectionInfo.getHostPop3();
+        this.port = ConnectionInfo.getPortPop3();
+        this.user = UserCredentials.getUsername();
+        this.password = UserCredentials.getPassword();
+    }
 
     public void buildEmailConnection() {
         Properties props = new Properties(); // a list for holding the configurations for the connection
         try {
-            props.put("mail.pop3.host", ConnectionInfo.getHostPop3());
-            props.put("mail.pop3.port", ConnectionInfo.getPortPop3());
+            props.put("mail.pop3.host", host);
+            props.put("mail.pop3.port", port);
             if (port == 995) {
                 props.put("mail.pop3.ssl.enable", "true"); // enables an encryption for the POP3 connection
             }
@@ -37,6 +44,21 @@ public class EstablishConnection {
             store.connect(host, user, password); // establishes the connection to the mail server
         } catch (Exception e) {
             e.printStackTrace();
+            throw new RuntimeException("Connection failed");
         }
+    }
+
+    public void closeEmailConnection() {
+        try {
+            inbox.close(false); // closes the inbox folder. The argument false assures that any changes which
+                                // were made, will not be saved
+            store.close(); // closes the connetion to the mail server
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Store getStore() {
+        return store;
     }
 }

@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import mailclient.com.App;
-import mailclient.com.EmailAPI.EstablishConnection;
+import mailclient.com.EmailAPI.Connection;
 import mailclient.com.connectionData.MessageData;
 import mailclient.com.credentials.UserCredentials;
 
@@ -131,7 +131,7 @@ public class SendController implements Initializable {
                 MessageBox.setPromptText("Enter a message!");
                 return;
             }
-            EstablishConnection establishConnection = new EstablishConnection();
+            Connection establishConnection = new Connection();
             MessageData messageData = new MessageData(to, cc, subject, message);
 
             System.out.println("Sent!");
