@@ -72,14 +72,14 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="FullnameBox" depthTest="ENABLE" prefHeight="41.0" prefWidth="263.0" promptText="Full Name" styleClass="host-port-input" stylesheets="@../styles/styles.css" text="Grigor Muradyan">
+                  <TextField fx:id="FullnameBox" depthTest="ENABLE" prefHeight="41.0" prefWidth="263.0" promptText="Full Name" styleClass="host-port-input" stylesheets="@../styles/styles.css" text="Grigor Ali">
                      <GridPane.margin>
                         <Insets />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="EmailBox" promptText="Email" styleClass="host-port-input" stylesheets="@../styles/styles.css" text="grigor.muradyan@uni-jena.de" GridPane.rowIndex="2" />
-                  <TextField fx:id="UsernameBox" promptText="Username" style="-fx-background-color: #FFFFFF;" styleClass="host-port-input" stylesheets="@../styles/styles.css" text="he76coq" GridPane.rowIndex="4" />
-                  <PasswordField fx:id="PasswordBox" promptText="Password" styleClass="host-port-input" stylesheets="@../styles/styles.css" text="Nortarvasexan777" GridPane.rowIndex="6" />
+                  <TextField fx:id="EmailBox" promptText="Email" styleClass="host-port-input" stylesheets="@../styles/styles.css" text="grigor.ali1@mailfence.com" GridPane.rowIndex="2" />
+                  <TextField fx:id="UsernameBox" promptText="Username" style="-fx-background-color: #FFFFFF;" styleClass="host-port-input" stylesheets="@../styles/styles.css" text="grigor.ali" GridPane.rowIndex="4" />
+                  <PasswordField fx:id="PasswordBox" promptText="Password" styleClass="host-port-input" stylesheets="@../styles/styles.css" text="javamailAliGrigor" GridPane.rowIndex="6" />
                </children>
             </GridPane>
          </children>

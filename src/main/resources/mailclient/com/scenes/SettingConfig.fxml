@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="620.0" prefWidth="1080.0" fx:id="BorderSetting" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mailclient.com.controllers.SettingController">
+<BorderPane fx:id="BorderSetting" prefHeight="620.0" prefWidth="1080.0" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mailclient.com.controllers.SettingController">
    <left>
       <VBox prefHeight="620.0" prefWidth="226.0" styleClass="menu-panel" stylesheets="@../styles/styles.css" BorderPane.alignment="CENTER">
          <children>
@@ -80,21 +80,6 @@
       <VBox prefHeight="620.0" prefWidth="805.0" BorderPane.alignment="CENTER">
          <children>
             <BorderPane prefHeight="620.0" prefWidth="854.0">
-               <top>
-                  <Button fx:id="settingBtn" mnemonicParsing="false" onAction="#switchToSettings" prefHeight="51.0" prefWidth="200.0" stylesheets="@../styles/styles.css" text="Settings" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font name="Century" size="12.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="compose-button" />
-                        <String fx:value="setting-button" />
-                        <String fx:value="text" />
-                     </styleClass>
-                     <BorderPane.margin>
-                        <Insets top="20.0" />
-                     </BorderPane.margin>
-                  </Button>
-               </top>
                <left>
                   <BorderPane prefHeight="462.0" prefWidth="234.0" BorderPane.alignment="CENTER">
                      <right>
@@ -143,30 +128,30 @@
                                           <Insets bottom="130.0" left="23.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label text="HostPop3" GridPane.rowIndex="4">
+                                    <Label text="IncomingHost" GridPane.rowIndex="4">
                                        <GridPane.margin>
                                           <Insets bottom="20.0" left="23.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label text="PortPop3" GridPane.rowIndex="4">
+                                    <Label prefHeight="15.0" prefWidth="98.0" text="IncomingPort" GridPane.rowIndex="4">
                                        <GridPane.margin>
-                                          <Insets left="23.0" top="100.0" />
+                                          <Insets left="23.0" right="2.0" top="100.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <TextField fx:id="fname" editable="false" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" />
-                                    <TextField fx:id="email" editable="false" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <TextField fx:id="user" editable="false" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <TextField fx:id="hsmtp" editable="false" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                    <TextField fx:id="fname" disable="true" editable="false" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" />
+                                    <TextField fx:id="email" disable="true" editable="false" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="user" disable="true" editable="false" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="hsmtp" disable="true" editable="false" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                        <GridPane.margin>
                                           <Insets bottom="250.0" />
                                        </GridPane.margin>
                                     </TextField>
-                                    <TextField fx:id="hpop3" editable="false" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                    <TextField fx:id="hpop3" disable="true" editable="false" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                        <GridPane.margin>
                                           <Insets bottom="30.0" />
                                        </GridPane.margin>
                                     </TextField>
-                                    <PasswordField fx:id="pw" editable="false" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <PasswordField fx:id="pw" disable="true" editable="false" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <GridPane prefHeight="318.0" prefWidth="322.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                       <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="63.0" />
@@ -178,12 +163,12 @@
                                         <RowConstraints maxHeight="199.0" minHeight="10.0" prefHeight="130.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <TextField fx:id="psmtp" prefHeight="26.0" prefWidth="71.0" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.rowIndex="1">
+                                          <TextField fx:id="psmtp" disable="true" prefHeight="26.0" prefWidth="71.0" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.rowIndex="1">
                                              <GridPane.margin>
                                                 <Insets bottom="40.0" />
                                              </GridPane.margin>
                                           </TextField>
-                                          <TextField fx:id="ppop3" prefHeight="0.0" prefWidth="63.0" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.rowIndex="2">
+                                          <TextField fx:id="ppop3" disable="true" prefHeight="0.0" prefWidth="63.0" styleClass="host-port-input" stylesheets="@../styles/styles.css" GridPane.rowIndex="2">
                                              <GridPane.margin>
                                                 <Insets bottom="95.0" />
                                              </GridPane.margin>
@@ -198,7 +183,7 @@
                   </BorderPane>
                </left>
                <right>
-                  <Button fx:id="configBtn" mnemonicParsing="false" onAction="#DlConfig" prefHeight="51.0" prefWidth="200.0" stylesheets="@../styles/styles.css" text="Download Configurations" BorderPane.alignment="CENTER">
+                  <Button fx:id="configBtn" mnemonicParsing="false" onAction="#DlConfig" prefHeight="51.0" prefWidth="209.0" stylesheets="@../styles/styles.css" text="Download Configurations" BorderPane.alignment="CENTER">
                      <font>
                         <Font name="Century" size="12.0" />
                      </font>
@@ -212,6 +197,13 @@
                      </BorderPane.margin>
                   </Button>
                </right>
+               <top>
+                  <AnchorPane prefHeight="76.0" prefWidth="854.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label alignment="CENTER" layoutX="350.0" layoutY="19.0" prefHeight="35.0" prefWidth="154.0" styleClass="mask-headline" stylesheets="@../styles/styles.css" text="Settings" />
+                     </children>
+                  </AnchorPane>
+               </top>
             </BorderPane>
          </children>
       </VBox>

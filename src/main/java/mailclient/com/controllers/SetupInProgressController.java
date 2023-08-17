@@ -1,39 +1,23 @@
 package mailclient.com.controllers;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.beans.binding.When;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
 import mailclient.com.App;
 import mailclient.com.EmailAPI.Connection;
-import mailclient.com.EmailAPI.PingServer;
 import mailclient.com.EmailAPI.receive.ReceiveMessages;
-import mailclient.com.EmailAPI.receive.model.Pop3Model;
 import mailclient.com.EmailAPI.receive.model.ReceivedMessageModel;
-import mailclient.com.connectionData.ConnectionInfo;
-import mailclient.com.credentials.UserCredentials;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.List;
 
 public class SetupInProgressController implements Initializable {
-    Pop3Model pop3Model;
 
     @FXML
     private ProgressBar progressBar;
@@ -43,8 +27,6 @@ public class SetupInProgressController implements Initializable {
 
     @FXML
     private Label errorMessage;
-
-    private boolean homepageSwitched = false;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         errorMessage.setText("Connecting to server...");
@@ -107,62 +89,6 @@ public class SetupInProgressController implements Initializable {
     private void switchToHomepage() {
         try {
             App.setRoot("Homepage");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // private void startProgressBarAnimation() {
-    // Timeline timeline = new Timeline(
-    // new KeyFrame(Duration.seconds(0.5), event -> {
-    // if (!homepageSwitched && progressBar.getProgress() >= 1.0) {
-    // // Switch to homepage
-    // try {
-    // switchToHomepage();
-    // homepageSwitched = true; // Set the flag to indicate switch occurred
-    // } catch (IOException e) {
-    // e.printStackTrace();
-    // // Handle the exception appropriately
-    // }
-    // }
-    // }));
-    // timeline.setCycleCount(Timeline.INDEFINITE);
-    // timeline.play();
-
-    // // Simulate the progress being filled
-    // simulateProgress();
-    // }
-
-    private void simulateProgress() {
-        Timeline simulateTimeline = new Timeline(
-                new KeyFrame(Duration.seconds(1), event -> {
-                    double currentProgress = progressBar.getProgress();
-                    if (currentProgress < 1.0) {
-                        progressBar.setProgress(currentProgress + 0.1);
-                    }
-                }));
-        simulateTimeline.setCycleCount(10);
-        simulateTimeline.play();
-    }
-
-    private void saveReceivedMessagesToJson(List<ReceivedMessageModel> messages) {
-        JSONArray jsonArray = new JSONArray();
-
-        for (ReceivedMessageModel message : messages) {
-            JSONObject jsonMessage = new JSONObject();
-            // jsonMessage.put("id", message.getId());
-            jsonMessage.put("Sender", message.getFrom());
-            jsonMessage.put("Receivers", message.getTo());
-            jsonMessage.put("Content", message.getContent());
-            jsonMessage.put("ReceivedDate", message.getReceivedDate());
-            jsonMessage.put("SentDate", message.getSentDate());
-
-            jsonArray.put(jsonMessage);
-        }
-
-        try (FileWriter file = new FileWriter("savedMessages.json")) {
-            file.write(jsonArray.toString());
-            file.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }

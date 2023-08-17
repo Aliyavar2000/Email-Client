@@ -1,30 +1,16 @@
 package mailclient.com.controllers;
 
-import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.net.URL;
-import java.time.Duration;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.mail.Message;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import javafx.animation.PauseTransition;
-import javafx.beans.InvalidationListener;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,7 +23,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -46,7 +31,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-// import javafx.util.Callback;
 import mailclient.com.App;
 import mailclient.com.EmailAPI.Connection;
 import mailclient.com.EmailAPI.receive.ReceiveMessages;
@@ -110,8 +94,6 @@ public class HomepageController implements Initializable {
     @FXML
     private TextArea messageText;
 
-    private List<ReceivedMessageModel> receivedMessages;
-
     @FXML
     private ProgressIndicator syncProgressIndicator;
 
@@ -152,7 +134,8 @@ public class HomepageController implements Initializable {
         if (newMessageCount > oldMessageCount) {
             setMessageCount(newMessageCount);
             syncProgressIndicator.setProgress(0.2);
-            List<ReceivedMessageModel> messages = App.fetchMessages(connection, newMessageCount - oldMessageCount);
+            List<ReceivedMessageModel> messages = App.fetchMessages(connection,
+                    newMessageCount - (newMessageCount - oldMessageCount));
             syncProgressIndicator.setProgress(0.5);
             String filepath = "src/main/resources/mailclient/com/savedMessages/savedMessages.json";
             if (messages != null) {
@@ -160,11 +143,11 @@ public class HomepageController implements Initializable {
                 syncProgressIndicator.setProgress(0.8);
                 initialCount = newMessageCount.intValue();
                 initialize(null, null);
-                subjectCol.setStyle("-fx-background-color: #2a9d8f");
-
+                markNewMessages(newMessageCount - oldMessageCount);
             }
         }
         syncProgressIndicator.setProgress(1.0);
+
         // Reset the progress indicator after a short delay
         PauseTransition pause = new PauseTransition();
         pause.setOnFinished(e -> {
@@ -173,19 +156,24 @@ public class HomepageController implements Initializable {
         pause.play();
     }
 
+    private void markNewMessages(int count) {
+        subjectCol.setStyle("-fx-font-weight: bold; -fx-text-fill: #2a9d8f");
+        fromCol.setStyle("-fx-font-weight: bold; -fx-text-fill: #2a9d8f");
+        toCol.setStyle("-fx-font-weight: bold; -fx-text-fill: #2a9d8f");
+        receivedCol.setStyle("-fx-font-weight: bold; -fx-text-fill: #2a9d8f");
+        sentCol.setStyle("-fx-font-weight: bold; -fx-text-fill: #2a9d8f");
+    }
+
     @FXML
     public void terminateApp(ActionEvent event) throws IOException {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Logout");
         alert.setHeaderText("Hambal! Are you sure you want to logout?");
         alert.setContentText("Press OK to continue");
-
         if (alert.showAndWait().get().equals(ButtonType.OK)) {
-
             stage = (Stage) AnchorHome.getScene().getWindow();
             stage.close();
         }
-
     }
 
     @FXML
@@ -199,7 +187,6 @@ public class HomepageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // syncProgressIndicator.setProgress(0.0);
         emailList = FXCollections.observableArrayList();
         tableView.getStylesheets().add(getClass().getResource("/mailclient/com/styles/styles.css").toExternalForm());
         String filepath = "src/main/resources/mailclient/com/savedMessages/savedMessages.json";
@@ -307,7 +294,6 @@ public class HomepageController implements Initializable {
     }
 
     private int getMessagesCount() {
-        // initialCount = emailList.size();
         return initialCount;
     }
 

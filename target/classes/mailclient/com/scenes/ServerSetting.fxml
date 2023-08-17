@@ -32,6 +32,7 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
@@ -60,9 +61,26 @@
             <GridPane hgap="10" layoutX="140.0" layoutY="256.0" prefHeight="114.0" prefWidth="274.0" stylesheets="@../styles/styles.css" vgap="10">
                <children>
                   <Label prefHeight="29.0" prefWidth="168.0" styleClass="&#10;                        headline&#10;                    " text="Incoming Mail-Server" />
-                  <Label styleClass="&#10;                        block-headline&#10;                    " text="POP3" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                  <TextField fx:id="incomingHostnameField" prefHeight="25.0" prefWidth="201.0" promptText="Host" styleClass="host-port-input" stylesheets="@../styles/styles.css" text=" pop3.uni-jena.de" GridPane.rowIndex="2" />
-                  <TextField fx:id="incomingPortField" prefHeight="25.0" prefWidth="62.0" promptText="Port" styleClass="host-port-input" stylesheets="@../styles/styles.css" text="110" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="incomingHostnameField" prefHeight="25.0" prefWidth="201.0" promptText="Host" styleClass="host-port-input" stylesheets="@../styles/styles.css" text="imap.mailfence.com" GridPane.rowIndex="2" />
+                  <TextField fx:id="incomingPortField" prefHeight="25.0" prefWidth="62.0" promptText="Port" styleClass="host-port-input" stylesheets="@../styles/styles.css" text="993" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <AnchorPane GridPane.rowIndex="1">
+                     <children>
+                        <Button fx:id="pop3Button" mnemonicParsing="false" onAction="#pop3Selected" stylesheets="@../styles/styles.css" text="POP3">
+                           <styleClass>
+                              <String fx:value="block-headline" />
+                              <String fx:value="hand-cursor-button" />
+                              <String fx:value="button-continue-cancel" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="imapButton" layoutX="100.0" mnemonicParsing="false" onAction="#imapSelected" stylesheets="@../styles/styles.css" text="IMAP">
+                           <styleClass>
+                              <String fx:value="block-headline" />
+                              <String fx:value="hand-cursor-button" />
+                              <String fx:value="button-continue-cancel" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                  </AnchorPane>
                </children>
                <columnConstraints>
                   <ColumnConstraints />
@@ -79,8 +97,8 @@
                <children>
                   <Label prefHeight="31.0" prefWidth="171.0" styleClass="&#10;                        headline&#10;                    " stylesheets="@../styles/styles.css" text="Outgoing Mail-Server" />
                   <Label styleClass="&#10;                        block-headline&#10;                    " stylesheets="@../styles/styles.css" text="SMTP" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                  <TextField fx:id="outgoingHostnameField" prefHeight="25.0" prefWidth="201.0" promptText="Host" styleClass="host-port-input" stylesheets="@../styles/styles.css" text=" smpt.uni-jena.de" GridPane.rowIndex="2" />
-                  <TextField fx:id="outgoingPortField" prefHeight="25.0" prefWidth="62.0" promptText="Port" styleClass="host-port-input" stylesheets="@../styles/styles.css" text="587" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="outgoingHostnameField" prefHeight="25.0" prefWidth="201.0" promptText="Host" styleClass="host-port-input" stylesheets="@../styles/styles.css" text="smtp.mailfence.com" GridPane.rowIndex="2" />
+                  <TextField fx:id="outgoingPortField" prefHeight="25.0" prefWidth="62.0" promptText="Port" styleClass="host-port-input" stylesheets="@../styles/styles.css" text="465" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
                <columnConstraints>
                   <ColumnConstraints />
@@ -101,12 +119,20 @@
          <children>
             <ButtonBar layoutX="753.0" layoutY="1.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="70.0" prefWidth="140.0" stylesheets="@../styles/styles.css">
               <buttons>
-                  <Button fx:id="cancelSetting" layoutX="135.0" layoutY="18.0" mnemonicParsing="false" onAction="#switchToLogin" styleClass="button-continue-cancel" stylesheets="@../styles/styles.css" text="Cancel" />
-                <Button fx:id="continueToSetupProgress" mnemonicParsing="false" onAction="#switchToSetupInProgress" styleClass="button-continue-cancel" stylesheets="@../styles/styles.css" text="Continue">
+                  <Button fx:id="cancelSetting" layoutX="135.0" layoutY="18.0" mnemonicParsing="false" onAction="#switchToLogin" stylesheets="@../styles/styles.css" text="Cancel">
+                     <styleClass>
+                        <String fx:value="button-continue-cancel" />
+                        <String fx:value="hand-cursor-button" />
+                     </styleClass></Button>
+                <Button fx:id="continueToSetupProgress" mnemonicParsing="false" onAction="#switchToSetupInProgress" stylesheets="@../styles/styles.css" text="Continue">
                      <!-- change to  #switchToSetupInProgress -->
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
+                     <styleClass>
+                        <String fx:value="button-continue-cancel" />
+                        <String fx:value="hand-cursor-button" />
+                     </styleClass>
                   </Button>
               </buttons>
                <opaqueInsets>

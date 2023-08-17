@@ -4,15 +4,10 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.mail.Address;
 import javax.mail.BodyPart;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.internet.MimeMessage;
-
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.scene.control.RadioButton;
 
 public class EmailModel {
     private String from;
@@ -21,9 +16,6 @@ public class EmailModel {
     private Object content;
     private String dateSent;
     private String dateReceived;
-    // private RadioButton isSelected;
-    // private BooleanProperty selected = new SimpleBooleanProperty(false);
-    // private RadioButton radioButton;
 
     public EmailModel(String from, String[] to, String subject, Object content, String dateSent, String dateReceived) {
         this.from = from;
@@ -32,12 +24,6 @@ public class EmailModel {
         this.content = content;
         this.dateSent = dateSent;
         this.dateReceived = dateReceived;
-        // this.isSelected = new RadioButton();
-        // isSelected.getStylesheets()
-        // .add(getClass().getResource("/mailclient/com/styles/styles.css").toExternalForm());
-        // this.isSelected.getStyleClass().add("radio-button");
-        // System.out.println(this.isSelected.getStyleClass());
-        // System.out.println(this.isSelected.getStylesheets());
     }
 
     public String getFrom() {
@@ -115,18 +101,6 @@ public class EmailModel {
     public void setDateReceived(String dateReceived) {
         this.dateReceived = dateReceived;
     }
-
-    // public boolean isSelected() {
-    // return selected.get();
-    // }
-
-    // public void setSelected(boolean isSelected) {
-    // this.selected.set(isSelected);
-    // }
-
-    // public BooleanProperty selectedProperty() {
-    // return selected;
-    // }
 
     private String getFormattedReceivers(String receivers) {
         try {

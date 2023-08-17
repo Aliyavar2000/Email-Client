@@ -1,48 +1,83 @@
-// package mailclient.com.EmailAPI;
+package mailclient.com.EmailAPI;
 
-// import java.util.Properties;
+import java.util.Properties;
 
-// import javax.mail.Folder;
-// import javax.mail.Session;
-// import javax.mail.Store;
+import javax.mail.Folder;
+import javax.mail.Session;
+import javax.mail.Store;
 
-// import mailclient.com.connectionData.ConnectionInfo;
+import mailclient.com.connectionData.ConnectionInfo;
+import mailclient.com.credentials.UserCredentials;
 
-// public class EstablishConnection {
-// private Session emailSession;
-// private Folder inbox;
-// private Store store;
+public class Connection {
+    private Session emailSession;
+    private Store store;
+    private String host;
+    private int port;
+    private String user;
+    private String password;
+    private Folder inbox;
+    private String protocol;
 
-// // public EstablishConnection(String host, int port, String user, String
-// // password) {
+    public Connection() {
+        this.host = ConnectionInfo.getincomingHost();
+        this.port = ConnectionInfo.getincomingPort();
+        this.protocol = ConnectionInfo.getincomingProtocol();
+        this.user = UserCredentials.getUsername();
+        this.password = UserCredentials.getPassword();
+    }
 
-// // }
+    public void buildEmailConnection() {
+        Properties props = new Properties();
+        try {
+            if (protocol.equals("POP3")) {
+                props.put("mail.pop3.host", host);
+                props.put("mail.pop3.port", port);
+                if (port == 995) {
+                    props.put("mail.pop3.ssl.enable", "true");
+                }
+                emailSession = Session.getDefaultInstance(props);
+                if (port == 995) {
+                    store = emailSession.getStore("pop3s");
+                } else {
+                    store = emailSession.getStore("pop3");
+                }
+            } else if (protocol.equals("IMAP")) {
+                props.setProperty("mail.store.protocol", "imap");
+                props.put("mail.imap.host", host);
+                props.put("mail.imap.port", port);
+                if (port == 993) {
+                    props.put("mail.imap.ssl.enable", "true");
+                }
+                emailSession = Session.getInstance(props);
+                if (port == 993) {
+                    // store = emailSession.getStore("imaps");
+                } else {
+                    // store = emailSession.getStore("imap");
+                }
+                store = emailSession.getStore();
+            } else {
+                throw new IllegalArgumentException("Invalid protocol: " + protocol);
+            }
 
-// public void buildEmailConnection() {
-// Properties props = new Properties(); // a list for holding the configurations
-// for the connection
-// try {
-// props.put("mail.pop3.host", ConnectionInfo.getHostPop3());
-// props.put("mail.pop3.port", ConnectionInfo.getPortPop3());
-// if (port == 995) {
-// props.put("mail.pop3.ssl.enable", "true"); // enables an encryption for the
-// POP3 connection
-// }
-// emailSession = Session.getDefaultInstance(props); // returns a new Session
-// object, which is initialized with
-// // props
-// if (port == 995) {
-// store = emailSession.getStore("pop3s"); // returns a message store
-// (repository for storing email
-// // messages and related metadata) for the protocol pop3s
-// } else {
-// store = emailSession.getStore("pop3"); // returns a message store (repository
-// for storing email messages
-// }
-// store.connect(host, user, password); // establishes the connection to the
-// mail server
-// } catch (Exception e) {
-// e.printStackTrace();
-// }
-// }
-// }
+            store.connect(host, user, password);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Connection failed");
+        }
+    }
+
+    public void closeEmailConnection() {
+        try {
+            inbox.close(false); // closes the inbox folder. The argument false assures that any changes which
+                                // were made, will not be saved
+            store.close(); // closes the connetion to the mail server
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Store getStore() {
+        return store;
+    }
+}

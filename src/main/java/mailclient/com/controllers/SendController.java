@@ -16,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import mailclient.com.App;
-//import mailclient.com.EmailAPI.EstablishConnection;
 import mailclient.com.EmailAPI.send.SendMessage;
 import mailclient.com.connectionData.MessageData;
 import mailclient.com.credentials.UserCredentials;
@@ -40,6 +39,7 @@ public class SendController implements Initializable {
     private Button HomeButton;
 
     @FXML
+    
     private TextArea MessageBox;
 
     @FXML
@@ -85,7 +85,6 @@ public class SendController implements Initializable {
 
     @FXML
     void syncMessages(ActionEvent event) {
-
     }
 
     @FXML
@@ -96,11 +95,9 @@ public class SendController implements Initializable {
         alert.setContentText("Press OK to continue");
 
         if (alert.showAndWait().get().equals(ButtonType.OK)) {
-
             stage = (Stage) AnchorSend.getScene().getWindow();
             stage.close();
         }
-
     }
 
     @FXML
@@ -153,23 +150,19 @@ public class SendController implements Initializable {
                 MessageBox.setPromptText("Enter a message!");
                 return;
             }
-            // EstablishConnection establishConnection = new EstablishConnection();
 
             // send
-            ConnectionInfo connectionInfo = new ConnectionInfo();
             MessageData messageData = new MessageData(to, cc, subject, message);
             String emailSubject = messageData.getEmailSubject();
             String emailText = messageData.getEmailText();
-            SendMessage emailSender = new SendMessage(ConnectionInfo.getHostSmtp(), ConnectionInfo.getPortSmtp(),
+            SendMessage emailSender = new SendMessage(ConnectionInfo.getoutgoingHost(),
+                    ConnectionInfo.getoutgoingPort(),
                     UserCredentials.getUserMail(), UserCredentials.getPassword(), messageData.getEmailReciever(),
                     messageData.getEmailCc());
             emailSender.sendEmail(emailSubject, emailText);
 
-            //
-
             System.out.println("Sent!");
             switchToSettings(event);
-            // switchToSetupInProgress();
 
         } catch (Exception e) {
             System.out.println("Failed to send!");
@@ -177,8 +170,6 @@ public class SendController implements Initializable {
     }
 
     public String getFrom() {
-        // LoginController loginController = new LoginController();
-        // String from = loginController.getEmail();
         return FromBox.getText();
     }
 

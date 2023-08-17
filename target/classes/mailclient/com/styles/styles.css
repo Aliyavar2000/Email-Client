@@ -49,8 +49,6 @@
     -fx-text-fill: #2a9d8f;
     -fx-font-family: "Pacifico", cursive;;
     -fx-padding: 5px;
-    /* -fx-background-color: "white"; */
-    /* -fx-background-radius: 7px; */
 }
 
 .text-field-name {
@@ -83,21 +81,16 @@
     -fx-font-family: "Pacifico", cursive;;
     -fx-text-fill: #2a9d8f;
     -fx-text-stroke: #000000;
-    /* -fx-padding: 5px; */
-    /* -fx-background-color: white; */
 }
 
 .progress-bar {
     -fx-background-color: #f2f2f2;
-    /* to be extended */
 }
 
 .compose-button {
     -fx-text-fill: #264653;
     -fx-font-family: "Pacifico";
-    /* -fx-font-weight: bold; */
     -fx-font-size: 16px;
-    /* -fx-padding: 6px 12px; */
     -fx-background-color: #fefae0;
     -fx-cursor: hand;
     -fx-background-radius: 17px; 
@@ -108,22 +101,17 @@
 }
 
 .compose-pane {
-    /* -fx-border-radius: 14px; */
     -fx-background-radius: 17px; 
-    /* -fx-background-color: #e9edc9; */
 }
 
 .menu-panel {
     -fx-background-color: #2a9d8f;
-    /* -fx-background-radius: 17px;  */
 }
 
 .menu-buttons {
     -fx-text-fill: white;
-    -fx-font-family: "Pacifico", cursive;;
-    /* -fx-font-weight: bold; */    
+    -fx-font-family: "Pacifico", cursive;; 
     -fx-font-size: 17px;
-    /* -fx-padding: 6px 12px; */
     -fx-background-color: #2a9d8f;
     -fx-cursor: hand;
     -fx-background-radius: 14px; 
@@ -143,7 +131,6 @@
 
 .column-headlines {
     -fx-font-size: 18px;
-    /* -fx-font-family: "Pacifico", cursive; */
     -fx-text-fill: #2a9d8f;
     -fx-text-stroke: #000000;
     -fx-padding: 5px;
@@ -157,10 +144,8 @@
 }
 
 .table-view .column-header .label {
-    /* -fx-font-family: "ABeeZee"  ; */
     -fx-text-fill: #2a9d8f;
     -fx-font-size: 15px;
-    /* -fx-font-weight: bold; */
 }
 
 .setting-button {
@@ -174,4 +159,8 @@
 
 .setting-button:hover {
     -fx-background-color: #3d848d; /* Darker green */
+}
+
+.hand-cursor-button {
+    -fx-cursor: hand;
 }

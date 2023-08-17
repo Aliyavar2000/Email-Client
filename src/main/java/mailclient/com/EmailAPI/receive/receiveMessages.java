@@ -1,15 +1,13 @@
 package mailclient.com.EmailAPI.receive;
 
-import java.io.FileOutputStream;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,29 +17,22 @@ import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
-import javax.mail.Part;
-import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.MimeMessage;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
-import mailclient.com.EmailAPI.receive.model.Pop3Model;
 import mailclient.com.EmailAPI.receive.model.ReceivedMessageModel;
-import mailclient.com.connectionData.ConnectionInfo;
 import mailclient.com.credentials.UserCredentials;
 
 public class ReceiveMessages {
-    // private Session emailSession;
+
     private Folder inbox;
     private Store store;
     private List<ReceivedMessageModel> messages;
 
-    // private String host;
-    // private int port;
-    // private String user;
-    // private String password;
     public ReceiveMessages(Store store) {
         messages = new ArrayList<ReceivedMessageModel>();
         this.store = store;
@@ -59,28 +50,26 @@ public class ReceiveMessages {
         }
     }
 
-    public List<ReceivedMessageModel> getMessages() {
+    private List<ReceivedMessageModel> getMessageUniversal(int j) {
         String sender;
         Address[] receiversAddresses;
         String subject;
         Object content;
         String receivedDateString;
         String sentDateString;
-
         try {
             if (inbox == null) {
                 getInbox();
             }
-            for (int i = 1; i <= inbox.getMessageCount(); i++) {
-                // for (int i = 1; i <= 20; i++) {
+            for (int i = j + 1; i <= inbox.getMessageCount(); i++) {
                 Message currentMessage = inbox.getMessage(i);
                 sender = getSender(currentMessage);
                 receiversAddresses = currentMessage.getAllRecipients();
                 String[] receivers = { UserCredentials.getUserMail() };
                 if (receiversAddresses != null) {
                     receivers = new String[receiversAddresses.length];
-                    for (int j = 0; j < receiversAddresses.length; j++) {
-                        receivers[j] = receiversAddresses[j].toString();
+                    for (int l = 0; l < receiversAddresses.length; l++) {
+                        receivers[l] = receiversAddresses[l].toString();
                     }
                 }
                 subject = currentMessage.getSubject();
@@ -99,45 +88,20 @@ public class ReceiveMessages {
         return messages;
     }
 
-    public List<ReceivedMessageModel> getMessages(int count) {
-        String sender;
-        Address[] receiversAddresses;
-        String subject;
-        Object content;
-        String receivedDateString;
-        String sentDateString;
+    public List<ReceivedMessageModel> getMessages() {
 
-        try {
-            if (inbox == null) {
-                getInbox();
-            }
-            for (int i = inbox.getMessageCount() - count; i < inbox.getMessageCount(); i++) {
-                // for (int i = 1; i <= 20; i++) {
-                Message currentMessage = inbox.getMessage(i + 1);
-                sender = getSender(currentMessage);
-                receiversAddresses = currentMessage.getAllRecipients();
-                String[] receivers = { UserCredentials.getUserMail() };
-                if (receiversAddresses != null) {
-                    receivers = new String[receiversAddresses.length];
-                    for (int j = 0; j < receiversAddresses.length; j++) {
-                        receivers[j] = receiversAddresses[j].toString();
-                    }
-                }
-                subject = currentMessage.getSubject();
-                content = currentMessage.getContent();
-                Date receivedDate = currentMessage.getReceivedDate();
-                receivedDateString = receivedDate != null ? receivedDate.toString() : "N/A";
-                Date sentDate = currentMessage.getSentDate();
-                sentDateString = sentDate != null ? sentDate.toString() : "N/A";
-                ReceivedMessageModel message = new ReceivedMessageModel(sender, receivers, subject, content,
-                        receivedDateString, sentDateString);
-                messages.add(message);
-            }
-            System.out.println("messageCount: " + inbox.getMessageCount());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return messages;
+        return getMessageUniversal(1);
+    }
+
+    public List<ReceivedMessageModel> getMessages(int count) {
+        int i = count;
+        // try {
+        // i = inbox.getMessageCount() - count;
+        // } catch (MessagingException e) {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // }
+        return getMessageUniversal(i);
     }
 
     private void getInbox() {
@@ -171,33 +135,60 @@ public class ReceiveMessages {
         }
     }
 
-    private String getDate(Message message) {
-        String date = "";
-        try {
-            String[] dateHeaders = message.getHeader("Date");
-            if (dateHeaders != null && dateHeaders.length > 0) {
-                // Use the first date header
-                date = dateHeaders[0];
-            } else {
-                System.out.println("Sent Date header not found");
-                date = "unknown";
-            }
-        } catch (Exception e) {
+    private JSONArray readJsonFromFile(String filepath) {
+        try (FileReader fileReader = new FileReader(filepath)) {
+            return new JSONArray(new JSONTokener(fileReader));
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        return date;
+        return new JSONArray();
     }
 
-    public void saveMessagesToFile(List<ReceivedMessageModel> messages, String filePath) {
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
-            outputStream.writeObject(messages);
+    private void archiveJson(String filepath, JSONArray jsonArray) {
+        // Append a timestamp to the existing file name to create the archive file name
+        String archiveFileName = getArchiveFileName(filepath);
+        String archiveFilePath = getArchiveFilePath(filepath, archiveFileName);
+
+        try (FileWriter fileWriter = new FileWriter(archiveFilePath)) {
+            fileWriter.write(jsonArray.toString());
+            fileWriter.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void writeToJsonFile(List<ReceivedMessageModel> messages, String filePath) {
+    private String getArchiveFileName(String filepath) {
+        File file = new File(filepath);
+        String originalName = file.getName();
+        int dotIndex = originalName.lastIndexOf('.');
+        if (dotIndex != -1) {
+            String nameWithoutExtension = originalName.substring(0, dotIndex);
+            String extension = originalName.substring(dotIndex);
+            return nameWithoutExtension + "_" + getTimeStamp() + extension;
+        } else {
+            return originalName + "_" + getTimeStamp();
+        }
+    }
+
+    private String getArchiveFilePath(String filepath, String archiveFileName) {
+        File file = new File(filepath);
+        String parentDirectory = file.getParent();
+        return parentDirectory + File.separator + archiveFileName;
+    }
+
+    private String getTimeStamp() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        return sdf.format(new Date());
+    }
+
+    public void writeToJsonFile(List<ReceivedMessageModel> messages, String filepath) {
+
         JSONArray jsonArray = new JSONArray();
+        // Read the existing JSON file
+        JSONArray existingJsonArray = readJsonFromFile(filepath);
+
+        // Archive the existing JSON file
+        archiveJson(filepath, existingJsonArray);
 
         for (ReceivedMessageModel message : messages) {
             JSONObject jsonObject = new JSONObject();
@@ -212,7 +203,7 @@ public class ReceiveMessages {
             jsonArray.put(jsonObject);
         }
 
-        try (FileWriter fileWriter = new FileWriter(filePath)) {
+        try (FileWriter fileWriter = new FileWriter(filepath)) {
             fileWriter.write(jsonArray.toString(4)); // Indent with 4 spaces for better readability
             fileWriter.flush();
             System.out.println("Messages written to JSON file successfully!");
@@ -278,8 +269,6 @@ public class ReceiveMessages {
                         } else if (bodyPart.isMimeType("text/html")) {
                             textContent = (String) bodyPart.getContent();
                             break;
-                        } else if (Part.ATTACHMENT.equalsIgnoreCase(bodyPart.getDisposition())) {
-                            // handle attachment
                         }
                     }
                 }
@@ -291,14 +280,15 @@ public class ReceiveMessages {
             try {
                 for (int i = 0; i < multipart.getCount(); i++) {
                     BodyPart bodyPart = multipart.getBodyPart(i);
-                    if (bodyPart.isMimeType("text/plain")) {
+                    String contentType = bodyPart.getContentType();
+
+                    // Check if the content type is text/plain or text/html
+                    if (contentType.contains("text/plain")) {
                         textContent = (String) bodyPart.getContent();
                         break;
-                    } else if (bodyPart.isMimeType("text/html")) {
+                    } else if (contentType.contains("text/html")) {
                         textContent = (String) bodyPart.getContent();
                         break;
-                    } else if (Part.ATTACHMENT.equalsIgnoreCase(bodyPart.getDisposition())) {
-                        // handle attachment
                     }
                 }
             } catch (MessagingException | IOException e) {

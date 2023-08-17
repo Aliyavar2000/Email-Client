@@ -2,8 +2,6 @@ package mailclient.com.EmailAPI.receive.model;
 
 import java.io.Serializable;
 
-import javax.mail.Address;
-
 public class ReceivedMessageModel implements Serializable {
     private String sender;
     private String[] receivers;

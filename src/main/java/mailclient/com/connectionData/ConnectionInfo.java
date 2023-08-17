@@ -1,37 +1,38 @@
 package mailclient.com.connectionData;
 
-import mailclient.com.credentials.UserCredentials;
-
 public class ConnectionInfo {
-    private static String hostPop3;
-    private static String hostSmtp;
-    private static int portPop3;
-    private static int portSmtp;
-    // private static String userMail;
-    // private static String userPassword;
+    private static String incomingHost;
+    private static String outgoingHost;
+    private static int incomingPort;
+    private static int outgoingPort;
+    private static String incomingprotocol;
 
-    public static void initialize(String hostPop3, int portPop3, String hostSmtp, int portSmtp) {
-        ConnectionInfo.hostPop3 = hostPop3;
-        ConnectionInfo.hostSmtp = hostSmtp;
-        ConnectionInfo.portPop3 = portPop3;
-        ConnectionInfo.portSmtp = portSmtp;
-        // ServerData.userMail = UserCredentials.getUserMail();
-        // ServerData.userPassword = UserCredentials.getPassword();
+    public static void initialize(String incomingHost, int incomingPort, String incomingProtocol, String outgoingHost,
+            int outgoingPort) {
+        ConnectionInfo.incomingHost = incomingHost;
+        ConnectionInfo.outgoingHost = outgoingHost;
+        ConnectionInfo.incomingPort = incomingPort;
+        ConnectionInfo.outgoingPort = outgoingPort;
+        ConnectionInfo.incomingprotocol = incomingProtocol;
     }
 
-    public static String getHostPop3() {
-        return hostPop3;
+    public static String getincomingHost() {
+        return incomingHost;
     }
 
-    public static String getHostSmtp() {
-        return hostSmtp;
+    public static String getoutgoingHost() {
+        return outgoingHost;
     }
 
-    public static int getPortPop3() {
-        return portPop3;
+    public static int getincomingPort() {
+        return incomingPort;
     }
 
-    public static int getPortSmtp() {
-        return portSmtp;
+    public static int getoutgoingPort() {
+        return outgoingPort;
+    }
+
+    public static String getincomingProtocol() {
+        return incomingprotocol;
     }
 }
