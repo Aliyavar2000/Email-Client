@@ -7,8 +7,6 @@ import javax.mail.internet.MimeMessage;
 import java.util.Base64;
 import java.util.Properties;
 
-import mailclient.com.connectionData.MessageData;
-
 public class SendMessage {
     private String smtpHost;
     private int smtpPort;
